@@ -22,12 +22,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "'src' Depo Kontrolü"
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v4.5.1
         with:
           path: "src"
 
       - name: "'build' Depo Kontrolü"
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v4.5.1
         with:
           ref: "builds"
           path: "builds"
