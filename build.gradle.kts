@@ -42,7 +42,7 @@ subprojects {
     }
 
     android {
-        namespace = "com.keyiflerolsun"
+        namespace = "com.copyshadow"
 
         defaultConfig {
             minSdk = 21
