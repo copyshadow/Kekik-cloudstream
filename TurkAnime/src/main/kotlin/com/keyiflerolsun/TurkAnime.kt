@@ -140,42 +140,42 @@ class TurkAnime : MainAPI() {
     }
 
     private suspend fun iframe2Load(document: Document, @Suppress("UNUSED_PARAMETER") iframe: String, subtitleCallback: (SubtitleFile) -> Unit, callback: (ExtractorLink) -> Unit) {
-        // val mainVideo = iframe2AesLink(iframe)
-        // if (mainVideo != null) {
-        //     val mainKey = mainVideo.split("/").last()
-        //     val mainAPI = app.get(
-        //         "${mainUrl}/sources/${mainKey}/true",
-        //         headers = mapOf(
-        //             "Content-Type"     to "application/json",
-        //             "X-Requested-With" to "XMLHttpRequest",
-        //             "Csrf-Token"       to "EqdGHqwZJvydjfbmuYsZeGvBxDxnQXeARRqUNbhRYnPEWqdDnYFEKVBaUPCAGTZA",
-        //             "Connection"       to "keep-alive",
-        //             "Sec-Fetch-Dest"   to "empty",
-        //             "Sec-Fetch-Mode"   to "cors",
-        //             "Sec-Fetch-Site"   to "same-origin",
-        //             "Pragma"           to "no-cache",
-        //             "Cache-Control"    to "no-cache",
-        //         ),
-        //         referer = mainVideo,
-        //         cookies = mapOf("yasOnay" to "1")
-        //     ).text
+         val mainVideo = iframe2AesLink(iframe)
+         if (mainVideo != null) {
+             val mainKey = mainVideo.split("/").last()
+             val mainAPI = app.get(
+                 "${mainUrl}/sources/${mainKey}/true",
+                 headers = mapOf(
+                     "Content-Type"     to "application/json",
+                     "X-Requested-With" to "XMLHttpRequest",
+                     "Csrf-Token"       to "EqdGHqwZJvydjfbmuYsZeGvBxDxnQXeARRqUNbhRYnPEWqdDnYFEKVBaUPCAGTZA",
+                     "Connection"       to "keep-alive",
+                     "Sec-Fetch-Dest"   to "empty",
+                     "Sec-Fetch-Mode"   to "cors",
+                     "Sec-Fetch-Site"   to "same-origin",
+                     "Pragma"           to "no-cache",
+                     "Cache-Control"    to "no-cache",
+                 ),
+                 referer = mainVideo,
+                 cookies = mapOf("yasOnay" to "1")
+             ).text
 
-        //     val m3uLink = fixUrlNull(Regex("""file\":\"([^\"]+)""").find(mainAPI)?.groupValues?.get(1)?.replace("\\", ""))
-        //     Log.d("TRANM", "m3uLink » ${m3uLink}")
+             val m3uLink = fixUrlNull(Regex("""file\":\"([^\"]+)""").find(mainAPI)?.groupValues?.get(1)?.replace("\\", ""))
+             Log.d("TRANM", "m3uLink » ${m3uLink}")
 
-        //     if (m3uLink != null) {
-        //         callback.invoke(
-        //             ExtractorLink(
-        //                 source  = this.name,
-        //                 name    = this.name,
-        //                 url     = m3uLink,
-        //                 referer = "${mainVideo}",
-        //                 quality = Qualities.Unknown.value,
-        //                 isM3u8  = true,
-        //             )
-        //         )
-        //     }
-        // }
+             if (m3uLink != null) {
+                 callback.invoke(
+                     ExtractorLink(
+                         source  = this.name,
+                         name    = this.name,
+                         url     = m3uLink,
+                         referer = "${mainVideo}",
+                         quality = Qualities.Unknown.value,
+                         isM3u8  = true,
+                     )
+                 )
+             }
+         }
 
         for (button in document.select("button[onclick*='ajax/videosec']")) {
             val butonLink = fixUrlNull(button.attr("onclick").substringAfter("IndexIcerik('").substringBefore("'")) ?: continue
